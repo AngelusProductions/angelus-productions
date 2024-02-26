@@ -23,7 +23,7 @@ export default function Home() {
         xOffset: 0,
         yOffset: 0,
         size: 2,
-        speed: 0.5
+        speed: 1.5
       }))
     }
     return () => {
@@ -35,6 +35,7 @@ export default function Home() {
 
   return (
     <main className="">
+      {!halo && <div className="h-screen w-screen bg-black text-white flex items-center justify-center font-mono">Loading...</div>}
       <section id="halo-section" className="h-screen" ref={haloRef}>
         <h1 className="text-5xl text-white rounded-xl mx-auto font-sans text-center p-5 top-[45vh] w-fit bg-[#000000ad] shadow-white text-shadow-black">Welcome to Angelus Productions</h1>
       </section>
