@@ -8,13 +8,30 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        sans: "var(--font-fira-sans)",
+        mono: "var(--font-fira-code)",
       },
+      boxShadow: {
+        white: "0 3px 24px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06)",
+      },
+      textShadow: {
+        black: "0px 3px 6px rgb(0 0 0)",
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    function({ addUtilities, theme }) {
+      const newUtilities: { [key: string]: { textShadow: string } } = {};
+      Object.entries(theme('textShadow')).forEach(([key, value]) => {
+        newUtilities[`.text-shadow-${key}`] = {
+          textShadow: String(value),
+        };
+      });
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }
+  ],
 };
 export default config;
